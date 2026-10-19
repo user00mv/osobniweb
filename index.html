@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pavel Filandr | kadeřník, vizážista, stylista a technolog</title>
+<meta name="description" content="Pavel Filandr: kadeřník, vizážista, stylista, technolog, edukátor a soudní znalec v oboru kadeřnictví s praxí od roku 2001. Ateliér v Praze, doplňky stravy Vitalium, závodní pózovací plavky Filandr a spolek Onkolehko.">
+<meta name="theme-color" content="#000000">
+
+<!-- Open Graph -->
+<meta property="og:type" content="profile">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:title" content="Pavel Filandr | kadeřník, vizážista, stylista a technolog">
+<meta property="og:description" content="Od roku 2001 kadeřník, vizážista, stylista, technolog, edukátor a podnikatel.">
+<meta property="og:image" content="assets/pavel-portrait.webp">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;600;700;800&amp;family=Montserrat:wght@400;500;600&amp;family=Newsreader:ital,wght@1,300&amp;display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   1. TOKENY
+   ============================================================ */
+:root{
+  --black:      #000000;
+  --surface:    #141210;
+  --surface-2:  #1E1B17;
+  --gold:       #C6A15B;
+  --gold-light: #E8D6AC;
+  --bone:       #F4F1EC;
+  --muted:      #9A948B;
+
+  /* Onkolehko – jediná sekce s vlastní barevností */
+  --teal:   #2AA3AE;
+  --coral:  #F2695B;
+
+  --grad-gold: linear-gradient(100deg, #8A6A2F 0%, #E8D6AC 45%, #C6A15B 100%);
+
+  --font-display: 'Tungsten', 'Big Shoulders Display', 'Oswald', 'Archivo Narrow', sans-serif;
+  --font-body: 'Montserrat', system-ui, -apple-system, sans-serif;
+  --font-quote: 'Newsreader', Georgia, serif;
+
+  /* jediná míra odsazení od kraje – drží ji navbar i všechny sekce */
+  --gut: clamp(1.5rem, 6vw, 7rem);
+  --maxw: 1320px;
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+  --ease-soft: cubic-bezier(.22, .61, .36, 1);
+}
+
+/* ============================================================
+   2. RESET A ZÁKLAD
+   ============================================================ */
+*,*::before,*::after{ box-sizing:border-box; }
+html{
+  -webkit-text-size-adjust:100%;
+  overflow-x:hidden;
+}
+/* kotva nesmí skončit pod plovoucí lištou (fallback, když neběží Lenis) */
+section[id]{ scroll-margin-top:96px; }
+a, button, summary{ -webkit-tap-highlight-color:rgba(198,161,91,.18); }
+body{
+  margin:0;
+  background:var(--black);
+  color:var(--bone);
+  font-family:var(--font-body);
+  font-size:1.0625rem;
+  line-height:1.65;
+  font-weight:400;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.is-locked{ overflow:hidden; }
+img{ display:block; max-width:100%; height:auto; }
+a{ color:inherit; text-decoration:none; }
+button,input,select,textarea{ font:inherit; color:inherit; }
+h1,h2,h3,h4,p,figure,blockquote,ol,ul{ margin:0; }
+ol,ul{ list-style:none; padding:0; }
+
+:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+  border-radius:2px;
+}
+
+/* Sazba: display font */
+.d{
+  font-family:var(--font-display);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:-0.01em;
+  /* Big Shoulders: verzálka s diakritikou má yMax 0.939 em, čárka klesá na -0.080 em.
+     Při prokladu pod 1.02 se čárky zapíchnou do řádku nad sebou. */
+  line-height:1.06;
+  color:var(--bone);
+}
+/* Mikro-popisek – jen tam, kde nese informaci */
+.micro{
+  font-family:var(--font-body);
+  font-weight:500;
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.lead{ color:var(--bone); }
+p{ color:var(--muted); max-width:65ch; }
+
+.wrap{ width:min(var(--maxw), 100% - var(--gut)*2); margin-inline:auto; }
+.section{ position:relative; padding-block:clamp(6rem, 13vh, 11rem); }
+.hairline{
+  height:1px; border:0; margin:0;
+  background:var(--grad-gold);
+  opacity:.8;
+}
+
+/* ============================================================
+   3. FILM GRAIN – bez něj je černá mrtvá
+   ============================================================ */
+.grain{
+  position:fixed; inset:0; z-index:70;
+  pointer-events:none; opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ============================================================
+   4. TLAČÍTKA
+   ============================================================ */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  position:relative; isolation:isolate;
+  padding:.95rem 1.9rem;
+  font-size:.78rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  border:1px solid rgba(232,214,172,.28);
+  background:transparent; color:var(--bone);
+  cursor:pointer;
+  transition:color .35s var(--ease-soft), border-color .35s var(--ease-soft);
+}
+/* zlatá linka vyjíždí zleva */
+.btn::before{
+  content:''; position:absolute; inset:0; z-index:-1;
+  background:var(--grad-gold);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .5s var(--ease-soft);
+}
+.btn:hover{ color:#100D08; border-color:transparent; }
+.btn:hover::before{ transform:scaleX(1); }
+.btn--gold{
+  border-color:transparent; color:#100D08;
+  background:var(--grad-gold);
+}
+.btn--gold::before{ background:var(--bone); }
+.btn--gold:hover{ color:#100D08; }
+
+/* Textový odkaz se zlatým podtržením (bez šipek) */
+.tlink{
+  display:inline-block; position:relative;
+  font-size:.8rem; font-weight:600;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--gold-light); padding-bottom:.4rem;
+}
+.tlink::after{
+  content:''; position:absolute; left:0; bottom:0; height:1px; width:100%;
+  background:var(--grad-gold);
+  transform:scaleX(.35); transform-origin:left;
+  transition:transform .45s var(--ease-soft);
+}
+.tlink:hover::after{ transform:scaleX(1); }
+/* na dotykových zařízeních větší plocha pro prst */
+@media (hover:none){
+  .tlink{ padding-top:.55rem; }
+  .nav__mark{ min-height:44px; }
+}
+
+/* ============================================================
+   5. PRELOADER – jediný velký režírovaný moment
+   ============================================================ */
+.pre{
+  position:fixed; inset:0; z-index:200;
+  background:var(--black);
+  display:grid; place-items:center;
+  clip-path:inset(0 0 0 0);
+}
+.pre__sig{
+  width:min(92vw, 1000px);
+  filter:invert(1) brightness(1.7);
+  clip-path:inset(0 100% 0 0);
+  will-change:clip-path, transform, opacity;
+  transform-origin:50% 50%;
+}
+.pre__nib{
+  position:absolute; left:50%; top:50%;
+  margin:-3.5px 0 0 -3.5px;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--gold-light);
+  box-shadow:0 0 14px 4px rgba(232,214,172,.55);
+  opacity:0;
+}
+html.pre-done .pre{ display:none; }
+
+/* ============================================================
+   6. NAVBAR – dynamic island
+   ============================================================ */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; justify-content:center;
+  padding-inline:var(--gut);
+  padding-top:env(safe-area-inset-top);
+  transition:padding-top .6s var(--ease-spring);
+  pointer-events:none;
+}
+.nav__shell{
+  pointer-events:auto;
+  display:flex; align-items:center; gap:1.25rem;
+  width:100%; max-width:var(--maxw);
+  padding:1.4rem 0;
+  border:1px solid transparent;
+  border-radius:0;
+  background:transparent;
+  box-shadow:none;
+  transition:
+    max-width .62s var(--ease-spring),
+    padding .62s var(--ease-spring),
+    border-radius .62s var(--ease-spring),
+    background-color .45s var(--ease-soft),
+    border-color .45s var(--ease-soft),
+    box-shadow .45s var(--ease-soft);
+}
+/* sbalený stav */
+.nav.is-pill{ padding-top:calc(16px + env(safe-area-inset-top)); }
+.nav.is-pill .nav__shell{
+  max-width:660px;
+  padding:.5rem .6rem .5rem 1.1rem;
+  border-radius:999px;
+  background:rgba(30,27,23,.55);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  backdrop-filter:blur(24px) saturate(160%);
+  border:1px solid rgba(232,214,172,.14);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 18px 50px rgba(0,0,0,.55);
+}
+.nav.is-pill .nav__links a{ padding-inline:.7rem; }
+
+.nav__mark{ display:flex; align-items:center; flex:0 0 auto; }
+.nav__mark img{
+  height:40px; width:auto;
+  filter:invert(1) brightness(1.6);
+  opacity:0;
+  transition:height .62s var(--ease-spring), opacity .4s linear;
+}
+.nav.is-pill .nav__mark img{ height:20px; }
+
+.nav__links{
+  position:relative;
+  display:flex; align-items:center; gap:.15rem;
+  margin-inline:auto;
+}
+.nav__links a{
+  position:relative; z-index:1;
+  padding:.55rem .85rem;
+  font-size:.74rem; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase;
+  color:var(--muted); white-space:nowrap;
+  border-radius:999px;
+  transition:color .3s var(--ease-soft);
+}
+.nav__links a:hover,
+.nav__links a.is-active{ color:var(--bone); }
+/* klouzavá zlatá pilulka pod aktivním odkazem */
+.nav__pill{
+  position:absolute; top:50%; left:0; z-index:0;
+  height:2rem; width:0;
+  transform:translate(0,-50%) ;
+  border-radius:999px;
+  background:linear-gradient(100deg, rgba(138,106,47,.30), rgba(232,214,172,.22) 45%, rgba(198,161,91,.30));
+  border:1px solid rgba(232,214,172,.18);
+  opacity:0;
+  transition:transform .5s var(--ease-spring), width .5s var(--ease-spring), opacity .3s linear;
+  pointer-events:none;
+}
+/* při přepočtu během sbalování lišty pilulka nesmí dobíhat vlastní animací */
+.nav__pill.is-sync{ transition:opacity .3s linear; }
+.nav__cta{
+  flex:0 0 auto;
+  padding:.7rem 1.3rem; font-size:.7rem;
+  border-radius:999px;
+  transition:opacity .35s var(--ease-soft), max-width .5s var(--ease-spring),
+             padding .5s var(--ease-spring), margin .5s var(--ease-spring),
+             color .35s var(--ease-soft), border-color .35s var(--ease-soft);
+  overflow:hidden; max-width:14rem;
+}
+/* CTA zůstává viditelné i v pilulce, jen se stáhne */
+.nav.is-pill .nav__cta{ padding:.6rem 1.05rem; font-size:.68rem; }
+
+.nav__burger{
+  display:none; flex:0 0 auto;
+  width:44px; height:44px; padding:0;
+  border:1px solid rgba(232,214,172,.18); border-radius:999px;
+  background:transparent; cursor:pointer;
+  position:relative;
+}
+.nav__burger span{
+  position:absolute; left:13px; width:18px; height:1px;
+  background:var(--bone);
+  transition:transform .35s var(--ease-spring), opacity .2s;
+}
+.nav__burger span:nth-child(1){ top:18px; }
+.nav__burger span:nth-child(2){ top:25px; }
+.nav__burger[aria-expanded="true"] span:nth-child(1){ transform:translateY(3.5px) rotate(45deg); }
+.nav__burger[aria-expanded="true"] span:nth-child(2){ transform:translateY(-3.5px) rotate(-45deg); }
+
+/* Mobilní full-screen menu */
+.mmenu{
+  position:fixed; inset:0; z-index:99;
+  display:none; flex-direction:column; justify-content:center;
+  padding:6rem var(--gut) 3rem;
+  background:rgba(20,18,16,.72);
+  -webkit-backdrop-filter:blur(26px) saturate(150%);
+  backdrop-filter:blur(26px) saturate(150%);
+  overscroll-behavior:contain;
+  overflow-y:auto;
+  padding-top:calc(6rem + env(safe-area-inset-top));
+  padding-bottom:calc(3rem + env(safe-area-inset-bottom));
+}
+.mmenu.is-open{ display:flex; }
+.mmenu::before{ /* pod sklem musí něco svítit, jinak nemá co rozostřovat */
+  content:''; position:absolute; inset:0; z-index:-1;
+  background:radial-gradient(60% 45% at 78% 12%, rgba(198,161,91,.22), transparent 70%);
+}
+.mmenu a{
+  display:block;
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(2.6rem, 13vw, 4.5rem); line-height:1.1;
+  letter-spacing:-0.01em;
+  padding:.12em 0;
+  border-bottom:1px solid rgba(232,214,172,.10);
+}
+.mmenu a:last-of-type{ border-bottom:0; }
+.mmenu__foot{ margin-top:2.5rem; }
+
+/* ============================================================
+   7. HERO
+   ============================================================ */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex; align-items:flex-end;
+  padding-bottom:clamp(3.5rem, 11vh, 7.5rem);
+  overflow:hidden;
+}
+/* Kontejner začíná přesně na horní hraně hero – nic se neukrajuje nad hlavou.
+   Přetéká jen dolů, kam stejně padá gradient do černé. */
+.hero__photo{
+  position:absolute; top:0; right:0; bottom:auto;
+  width:min(52%, 900px); height:118%;
+  z-index:0;
+}
+.hero__photo img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 4%;
+  filter:contrast(1.06) saturate(1.08) brightness(1.05);
+  will-change:transform;
+}
+.hero__photo::after{
+  content:''; position:absolute; inset:0;
+  background:
+    /* jen měkký šev na levé hraně; od 46 % dál je fotka nedotčená */
+    linear-gradient(90deg, #000 0%, rgba(0,0,0,.88) 9%, rgba(0,0,0,.34) 26%, rgba(0,0,0,0) 46%),
+    linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,0) 15%);
+}
+/* Měkký přechod spodní hrany hero do černé – nezávislý na posunu fotky */
+.hero::after{
+  content:''; position:absolute; left:0; right:0; bottom:0; height:34%;
+  z-index:1; pointer-events:none;
+  background:linear-gradient(0deg, #000 4%, rgba(0,0,0,.45) 38%, rgba(0,0,0,0) 100%);
+}
+/* celý blok hero (nadpis, linka, text, tlačítka) posunutý dovnitř od kraje */
+.hero__inner{
+  position:relative; z-index:2; width:100%;
+  padding-left:clamp(1.25rem, 6vw, 9rem);
+}
+.hero__title{
+  font-size:clamp(3.6rem, 12.5vw, 11.5rem);
+  line-height:0.86;        /* PAVEL / FILANDR – bez diakritiky, snese utažení */
+  margin-bottom:.3em;
+}
+.hero__title span{
+  display:block; overflow:hidden;
+}
+.hero__title span > i{ display:block; font-style:normal; }
+.hero__title .l2{ margin-left:0; }
+.hero__rule{
+  width:min(440px, 62%);
+  margin-bottom:2rem;
+}
+.hero__claim{
+  font-size:clamp(1rem, 1.35vw, 1.2rem);
+  max-width:min(46ch, 88%); color:var(--bone);
+  margin-bottom:2.8rem;
+}
+.hero__since{ display:block; margin-bottom:.7rem; line-height:1.6; }
+.hero__cta{ display:flex; flex-wrap:wrap; gap:.85rem; }
+.hero__year{
+  position:absolute; right:calc(var(--gut) * .55); bottom:clamp(2.5rem, 8vh, 6rem);
+  z-index:2;
+  writing-mode:vertical-rl;
+  font-family:var(--font-body); font-weight:500;
+  font-size:.72rem; letter-spacing:.42em;
+  color:var(--muted);
+  display:flex; align-items:center; gap:1rem;
+}
+.hero__year::after{
+  content:''; width:1px; height:70px;
+  background:linear-gradient(to bottom, var(--gold), transparent);
+}
+
+/* ============================================================
+   8. LOGO LIŠTA – marquee
+   ============================================================ */
+.strip{
+  position:relative;
+  border-top:1px solid rgba(232,214,172,.10);
+  border-bottom:1px solid rgba(232,214,172,.10);
+  background:var(--surface);
+  padding-block:2.1rem;
+  overflow:hidden;
+}
+.strip__track{
+  display:flex; width:max-content;
+  animation:marquee 46s linear infinite;
+}
+.strip:hover .strip__track{ animation-play-state:paused; }
+@keyframes marquee{ to{ transform:translateX(-50%); } }
+.strip__row{ display:flex; align-items:center; }
+.strip__item{
+  display:flex; align-items:center; flex:0 0 auto;
+  padding-inline:clamp(1.75rem, 4vw, 3.4rem);
+  filter:grayscale(1); opacity:.6;
+  transition:filter .45s var(--ease-soft), opacity .45s var(--ease-soft);
+}
+.strip__item:hover{ filter:grayscale(0); opacity:1; }
+.strip__item img{ height:26px; width:auto; }
+/* optické vyvážení – každé logo má jiný poměr stran */
+.strip__item img.s-filandr{ height:34px; }
+.strip__item img.s-drsny{ height:44px; }
+.strip__item img.s-ostrihano{ height:30px; }
+.strip__item img.inv{ filter:invert(1) brightness(1.6); }
+.strip__item--txt{
+  font-family:var(--font-display); font-weight:600; text-transform:uppercase;
+  font-size:1.65rem; letter-spacing:.02em; color:var(--bone);
+  line-height:1.04;
+}
+
+/* ============================================================
+   9. O MNĚ
+   ============================================================ */
+.about{ background:var(--black); overflow:hidden; }
+.about__sig{
+  position:absolute; z-index:0;
+  left:-6%; top:14%;
+  width:min(120%, 1500px);
+  opacity:.06; transform:rotate(-4deg);
+  filter:invert(1);
+  pointer-events:none;
+}
+.about .wrap{ position:relative; z-index:1; }
+.about__title{ font-size:clamp(3rem, 8vw, 7rem); margin-bottom:clamp(2rem, 5vw, 3.5rem); }
+.about__grid{
+  display:grid; grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+  gap:clamp(2.5rem, 6vw, 5.5rem);
+  align-items:start;
+}
+/* fotka má vlastní blok: rohová zlatá závorka + měkký spodní přechod */
+.about__figure{ position:relative; margin:0; }
+.about__frame{
+  position:absolute; z-index:0; left:-16px; top:-16px;
+  width:64%; height:38%;
+  border-top:1px solid rgba(232,214,172,.30);
+  border-left:1px solid rgba(232,214,172,.30);
+}
+.about__shot{ display:block; position:relative; z-index:1; }
+.about__shot img{ width:100%; filter:brightness(.9) contrast(1.04); }
+.about__shot::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,0) 26%);
+}
+.about__body p + p{ margin-top:1.2rem; }
+.about__stats{ margin-top:clamp(2.5rem, 6vw, 4rem); }
+/* mřížka místo baseline flexu – dlouhý popisek se teď zalomí uvnitř buňky
+   a nepřeteče přes vlasovou linku */
+.stat{
+  display:grid;
+  grid-template-columns:minmax(0, max-content) minmax(0, 1fr);
+  gap:0 clamp(.9rem, 2vw, 1.5rem);
+  align-items:center;
+  padding-block:clamp(1.1rem, 2.4vw, 1.7rem);
+  border-top:1px solid rgba(232,214,172,.13);
+}
+.stat:last-child{ border-bottom:1px solid rgba(232,214,172,.13); }
+.stat__num{
+  font-family:var(--font-display); font-weight:700;
+  font-size:clamp(2.6rem, 5vw, 3.9rem); line-height:1;
+  background:var(--grad-gold);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+  min-width:2em; text-align:right;
+  font-variant-numeric:tabular-nums;
+  white-space:nowrap;
+}
+.stat__label{
+  font-size:.84rem; color:var(--muted); line-height:1.45;
+  max-width:24ch; text-wrap:pretty;
+}
+
+/* ============================================================
+   10. PROJEKTY
+   ============================================================ */
+.work{
+  background:var(--surface);
+  padding-block:clamp(5rem, 12vh, 9rem);   /* symetricky, nadpis sedí uprostřed pásu */
+}
+.work__title{ font-size:clamp(3rem, 8vw, 7rem); margin:0; }
+
+/* 10.1 Vitalium – fotka produktu vlevo, dva boxy vpravo */
+.vita{
+  position:relative;
+  background:
+    radial-gradient(60% 70% at 18% 70%, rgba(198,161,91,.13), transparent 62%),
+    var(--surface-2);
+  border-top:1px solid rgba(232,214,172,.10);
+  border-bottom:1px solid rgba(232,214,172,.10);
+  overflow:hidden;
+}
+.vita__head{
+  display:flex; flex-wrap:wrap; align-items:flex-end;
+  gap:1.4rem 2rem; margin-bottom:clamp(2rem, 4.5vw, 3.2rem);
+}
+.vita__logo{ height:30px; width:auto; }
+.vita__title{ font-size:clamp(2.8rem, 6.4vw, 5.8rem); line-height:1.02; flex-basis:100%; }
+.vita__grid{
+  display:grid;
+  grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);
+  grid-template-rows:auto auto;
+  gap:clamp(.9rem, 1.6vw, 1.25rem);
+}
+/* výřez končí rovnou hranou – proto ho posadíme do rámu, kde ta hrana dává smysl */
+.vita__photo{
+  grid-row:1 / span 2;
+  position:relative; margin:0;
+  display:flex; align-items:flex-end;
+  background:
+    radial-gradient(74% 60% at 50% 74%, rgba(198,161,91,.20), transparent 74%),
+    linear-gradient(180deg, rgba(30,27,23,.92) 0%, rgba(20,18,16,.5) 100%);
+  border:1px solid rgba(232,214,172,.14);
+  overflow:hidden;
+}
+.vita__photo img{ display:block; width:100%; }
+.vbox{
+  position:relative;
+  padding:clamp(1.4rem, 3vw, 2.4rem);
+  border:1px solid rgba(232,214,172,.14);
+  background:rgba(20,18,16,.55);
+}
+.vbox p{ max-width:56ch; }
+.vbox__h{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.6rem, 2.8vw, 2.3rem); line-height:1.05;
+  color:var(--bone); margin-bottom:.8rem;
+}
+/* tři pilíře z textu – jedna řada, dělená vlasovou linkou */
+.vbox__pillars{
+  display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+  margin-top:clamp(1.3rem, 2.6vw, 1.8rem);
+  border-top:1px solid rgba(232,214,172,.14);
+}
+.vbox__pillars li{
+  padding:1rem .9rem 0 0;
+  font-family:var(--font-display); font-weight:600; text-transform:uppercase;
+  font-size:clamp(1.05rem, 1.7vw, 1.35rem); line-height:1.1;
+  color:var(--gold-light);
+}
+.vbox__pillars li + li{ padding-left:.9rem; border-left:1px solid rgba(232,214,172,.14); }
+/* produktový box nese akcent značky */
+.vbox--product{
+  background:linear-gradient(140deg, rgba(198,161,91,.16), rgba(198,161,91,.04) 60%), rgba(20,18,16,.55);
+  border-color:rgba(232,214,172,.26);
+}
+.vbox--product .vbox__h{ color:var(--gold-light); }
+.vbox--product .block__cta{ margin-top:1.6rem; }
+/* jednotný odstup a zarovnání tlačítek napříč projekty */
+.block__cta{
+  display:flex; flex-wrap:wrap; align-items:center;
+  gap:.9rem 1.8rem; margin-top:clamp(1.8rem, 4vw, 2.6rem);
+}
+
+/* 10.2 Atelier – užší typografický blok, bez fotky */
+.atelier{
+  position:relative; overflow:hidden;
+  background:var(--surface);
+  padding-block:clamp(6rem, 15vh, 12rem);
+  border-bottom:1px solid rgba(232,214,172,.10);
+}
+.atelier__bg{
+  position:absolute; z-index:0; top:0; right:0;
+  width:min(54%, 820px); height:100%;
+  object-fit:cover; object-position:46% 26%;
+}
+/* fotka se rozpouští do plochy sekce, nadpis jí přejíždí přes hranu */
+.atelier::after{
+  content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(90deg, var(--surface) 0%, var(--surface) 26%, rgba(20,18,16,.82) 46%, rgba(20,18,16,.18) 72%, rgba(20,18,16,.55) 100%),
+    linear-gradient(0deg, var(--surface) 0%, rgba(20,18,16,0) 26%),
+    linear-gradient(180deg, var(--surface) 0%, rgba(20,18,16,0) 18%);
+}
+.atelier__inner{ position:relative; z-index:2; }
+.atelier__title{
+  font-size:clamp(2.8rem, 9vw, 8rem);
+  line-height:0.92;        /* ATELIER / PAVLA FILANDRA – bez diakritiky */
+  margin-bottom:1.4rem;
+}
+.atelier__text{ max-width:46ch; }
+.atelier__text p{ max-width:none; }
+.atelier__text p + p{ margin-top:1.1rem; }
+
+/* 10.3 Filandr, pózovací plavky – text vlevo, závodníci v plavkách vpravo */
+.wear{
+  position:relative; overflow:hidden;
+  background:
+    radial-gradient(50% 60% at 82% 50%, rgba(198,161,91,.09), transparent 70%),
+    var(--black);
+  padding-block:clamp(6rem, 14vh, 10rem);
+  border-bottom:1px solid rgba(232,214,172,.10);
+}
+.wear__grid{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.95fr);
+  gap:clamp(2.5rem, 6vw, 5.5rem); align-items:center;
+}
+.wear__title{ margin:0 0 clamp(1.6rem, 3.4vw, 2.4rem); line-height:0; }
+.wear__title img{
+  width:min(100%, 520px); height:auto;
+  filter:invert(.96) sepia(.1);
+}
+.wear__text p + p{ margin-top:1.1rem; }
+.wear__gallery{
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:clamp(.7rem, 1.4vw, 1rem); align-items:start;
+}
+.wear__shot{
+  margin:0; position:relative; overflow:hidden;
+  border:1px solid rgba(232,214,172,.18);
+  background:var(--surface);
+}
+.wear__shot:nth-child(2){ margin-top:clamp(2.5rem, 6vw, 4.5rem); }
+.wear__shot img{
+  display:block; width:100%; aspect-ratio:2/3; object-fit:cover;
+  filter:saturate(.82) contrast(1.04);
+}
+.wear__shot::after{
+  content:''; position:absolute; inset:auto 0 0 0; height:30%;
+  background:linear-gradient(0deg, rgba(0,0,0,.55), transparent);
+  pointer-events:none;
+}
+
+/* 10.4 Odborný technolog a edukátor – kariéra ve dvou krocích */
+.tech{
+  position:relative;
+  background:
+    radial-gradient(60% 70% at 88% 18%, rgba(198,161,91,.10), transparent 66%),
+    var(--surface);
+  padding-block:clamp(6rem, 14vh, 10.5rem);
+  border-bottom:1px solid rgba(232,214,172,.10);
+}
+.tech__head{
+  display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+  gap:1.4rem clamp(2rem, 6vw, 5rem); align-items:end;
+  margin-bottom:clamp(3rem, 7vw, 5rem);
+}
+.tech__title{ font-size:clamp(2.6rem, 7vw, 5.6rem); }
+.tech__intro{ max-width:42ch; }
+.tech__steps{
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:clamp(2rem, 5vw, 4rem);
+}
+.tech__step{
+  padding-top:clamp(1.4rem, 3vw, 2rem);
+  border-top:1px solid rgba(232,214,172,.18);
+}
+.tech__years{
+  display:flex; align-items:baseline; gap:.8rem;
+  margin-bottom:.9rem; max-width:none;
+}
+.tech__num{
+  font-family:var(--font-display); font-weight:700;
+  font-size:clamp(3.4rem, 7vw, 5.2rem); line-height:.9;
+  background:var(--grad-gold);
+  -webkit-background-clip:text; background-clip:text;
+  color:transparent;
+}
+.tech__co{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.8rem, 3.6vw, 2.7rem); line-height:1.1;
+  color:var(--bone); margin:0 0 .8rem;
+}
+.tech__body{
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr));
+  gap:1.2rem clamp(2rem, 5vw, 4rem);
+  margin-top:clamp(3rem, 7vw, 5rem);
+  padding-top:clamp(2rem, 4vw, 3rem);
+  border-top:1px solid rgba(232,214,172,.11);
+}
+
+/* ============================================================
+   11. ONKOLEHKO – emocionální těžiště
+   ============================================================ */
+.onko{
+  position:relative; overflow:hidden;
+  background:var(--black);
+  padding-block:clamp(8rem, 18vh, 14rem);
+}
+.onko::before{
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(55% 45% at 18% 22%, rgba(42,163,174,.20), transparent 68%),
+    radial-gradient(45% 40% at 88% 82%, rgba(242,105,91,.11), transparent 70%);
+}
+.onko__inner{ position:relative; z-index:1; }
+.onko__head{ margin-bottom:clamp(2.5rem, 6vw, 4.5rem); }
+.onko__logo{ height:38px; width:auto; margin-bottom:clamp(1.6rem, 3vw, 2.2rem); }
+.onko__title{
+  font-size:clamp(2.6rem, 6vw, 5.4rem);
+  font-weight:700; line-height:1.04;
+  max-width:22ch; text-wrap:balance;
+}
+/* příběh: fotka s citací přes spodní hranu, vedle text */
+.onko__story{
+  display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+  gap:clamp(2rem, 6vw, 5rem); align-items:center;
+}
+.onko__photo{ position:relative; margin:0; }
+.onko__photo img{
+  width:100%;
+  filter:grayscale(1) contrast(1.04);
+  /* fotka se dole rozpouští do černé, aby na ní šla číst citace */
+  -webkit-mask-image:linear-gradient(180deg, #000 0%, #000 52%, rgba(0,0,0,.35) 80%, transparent 100%);
+  mask-image:linear-gradient(180deg, #000 0%, #000 52%, rgba(0,0,0,.35) 80%, transparent 100%);
+}
+.onko__photo::after{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(70% 50% at 50% 35%, rgba(42,163,174,.16), transparent 76%);
+}
+.onko__quote{
+  position:absolute; left:0; right:0; bottom:0; z-index:1;
+  margin:0; padding:0 clamp(1rem, 2vw, 1.5rem) 0 clamp(1.25rem, 2.4vw, 1.75rem);
+  border-left:2px solid var(--teal);
+}
+.onko__quote q{
+  font-family:var(--font-quote); font-style:italic; font-weight:300;
+  font-size:clamp(1.45rem, 2.6vw, 2.2rem); line-height:1.26;
+  color:var(--bone);
+  quotes:"„" "“";
+}
+.onko__body{ max-width:58ch; }
+.onko__body p + p{ margin-top:1.3rem; }
+/* projekty spolku: tři rovnocenné boxy */
+.onko__projects{ margin-top:clamp(4rem, 9vw, 6.5rem); }
+.onko__sub{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.8rem, 3.4vw, 2.6rem); line-height:1.05;
+  margin-bottom:clamp(1.4rem, 3vw, 2rem);
+}
+.oprojects{
+  display:grid; grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:clamp(.8rem, 1.6vw, 1.2rem);
+}
+.oproject{
+  display:flex; flex-direction:column;
+  padding:clamp(1.4rem, 2.6vw, 2rem);
+  background:rgba(42,163,174,.06);
+  border:1px solid rgba(42,163,174,.20);
+  border-top:2px solid var(--teal);
+}
+.oproject__tag{
+  font-size:.74rem; font-weight:600; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--teal); margin-bottom:.7rem;
+}
+.oproject__name{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.7rem, 2.6vw, 2.2rem); line-height:1.05;
+  color:var(--bone); margin:0 0 .8rem;
+}
+.oproject p:not(.oproject__tag){ font-size:.95rem; margin-bottom:1.3rem; }
+.oproject .tlink{ margin-top:auto; align-self:flex-start; }
+/* výzva k podpoře: jediný plný teal pás v sekci */
+.onko__support{
+  display:grid; grid-template-columns:minmax(0,1fr) auto;
+  gap:1.5rem clamp(2rem, 5vw, 4rem); align-items:center;
+  margin-top:clamp(1rem, 2vw, 1.4rem);
+  padding:clamp(1.6rem, 3.4vw, 2.6rem);
+  background:
+    radial-gradient(80% 140% at 0% 0%, rgba(42,163,174,.30), transparent 70%),
+    linear-gradient(100deg, rgba(42,163,174,.16), rgba(242,105,91,.08));
+  border:1px solid rgba(42,163,174,.30);
+}
+.onko__support-title{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.9rem, 3.6vw, 2.9rem); line-height:1.05; margin-bottom:.6rem;
+}
+.onko__support p{ color:var(--bone); max-width:52ch; }
+.onko__support .block__cta{ margin-top:0; }
+.onko__acct{ color:var(--bone); font-weight:600; white-space:nowrap; font-variant-numeric:tabular-nums; user-select:all; }
+.onko .btn--teal{
+  border-color:rgba(42,163,174,.55); color:var(--bone);
+}
+.onko .btn--teal::before{ background:var(--teal); }
+.onko .btn--teal:hover{ color:#04211F; }
+
+/* ============================================================
+   12. MÉDIA
+   ============================================================ */
+.media{ background:var(--surface); }
+.media__title{ font-size:clamp(3rem, 8vw, 7rem); margin-bottom:clamp(2.5rem, 6vw, 4rem); }
+.shows li{
+  border-top:1px solid rgba(232,214,172,.11);
+}
+.shows li:last-child{ border-bottom:1px solid rgba(232,214,172,.11); }
+/* celý řádek je proklik ven na pořad */
+.show{
+  display:grid; grid-template-columns:minmax(0,1fr) auto;
+  align-items:center; gap:1rem;
+  padding-block:clamp(.9rem, 2vw, 1.5rem);
+}
+.show__name{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.2rem 1.5rem; min-width:0; }
+.shows b{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(2rem, 5.5vw, 4rem); line-height:1.1;
+  color:var(--bone); min-width:0;
+  transition:color .35s var(--ease-soft);
+}
+.shows em{
+  font-style:normal; font-size:.78rem; letter-spacing:.06em; color:var(--muted);
+}
+.show__go{
+  position:relative; padding-bottom:.35rem;
+  font-size:.74rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--gold-light);
+}
+.show__go::after{
+  content:''; position:absolute; left:0; bottom:0; height:1px; width:100%;
+  background:var(--grad-gold);
+  transform:scaleX(.35); transform-origin:left;
+  transition:transform .45s var(--ease-soft);
+}
+.show:hover b, .show:focus-visible b{ color:var(--gold-light); }
+.show:hover .show__go::after, .show:focus-visible .show__go::after{ transform:scaleX(1); }
+.media__jury{ margin-top:1.6rem; }
+
+/* Rozhovor A11 – menší přehrávač s popiskem vedle */
+.media__feature{
+  display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
+  gap:clamp(1.5rem, 4vw, 3.5rem); align-items:center;
+  margin-top:clamp(3rem, 7vw, 5rem);
+}
+.media__feature-title{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.9rem, 3.6vw, 2.8rem); line-height:1.08;
+  margin:.5rem 0 .8rem;
+}
+.media__feature-txt p:not(.micro){ margin-bottom:1.4rem; }
+.video{
+  position:relative;
+  aspect-ratio:16/9; width:100%; max-width:760px;
+  background:
+    radial-gradient(60% 60% at 50% 50%, rgba(198,161,91,.12), transparent 70%),
+    var(--surface-2);
+  border:1px solid rgba(232,214,172,.14);
+  display:grid; place-items:center;
+  overflow:hidden;
+}
+.video iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; z-index:3; }
+.video__poster{
+  position:absolute; inset:0; z-index:0;
+  width:100%; height:100%; object-fit:cover; object-position:50% 24%;
+}
+.video::after{
+  content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(0deg, rgba(20,18,16,.92) 0%, rgba(20,18,16,.55) 55%, rgba(20,18,16,.35) 100%);
+}
+.video.is-playing::after{ display:none; }
+.video__inner{ position:relative; z-index:2; text-align:center; padding:1.5rem; max-width:38rem; }
+.video__play{
+  width:88px; height:88px; border-radius:50%;
+  border:1px solid rgba(232,214,172,.4);
+  background:rgba(20,18,16,.5);
+  -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+  display:grid; place-items:center; cursor:pointer;
+  margin:0 auto;
+  transition:transform .4s var(--ease-spring), border-color .3s, background-color .3s;
+}
+.video__play:hover{ transform:scale(1.07); border-color:var(--gold); background:rgba(198,161,91,.14); }
+.video__play svg{ width:22px; height:24px; margin-left:4px; fill:var(--gold-light); }
+
+/* ============================================================
+   13. CESTA – timeline
+   ============================================================ */
+.path{ background:var(--black); }
+.path__title{ font-size:clamp(3rem, 8vw, 7rem); margin-bottom:clamp(3rem, 7vw, 5rem); }
+.tl{ position:relative; padding-left:clamp(2.2rem, 6vw, 5rem); }
+.tl__rail{
+  position:absolute; left:0; top:.4rem; bottom:.4rem; width:1px;
+  display:block;
+  background:rgba(232,214,172,.12);
+}
+.tl__rail i{
+  position:absolute; inset:0;
+  background:var(--grad-gold);
+  transform-origin:top; transform:scaleY(1);
+  display:block;
+}
+.tl__item{ position:relative; padding-bottom:clamp(2.5rem, 6vw, 4.5rem); }
+.tl__item:last-child{ padding-bottom:0; }
+.tl__item::before{
+  content:''; position:absolute;
+  left:calc(clamp(2.2rem, 6vw, 5rem) * -1 - 3px); top:.55rem;
+  width:7px; height:7px; border-radius:50%;
+  background:var(--gold);
+}
+.tl__step{ display:block; margin-bottom:.6rem; }
+.tl__h{
+  font-family:var(--font-display); font-weight:700; text-transform:uppercase;
+  font-size:clamp(1.8rem, 4.5vw, 3.2rem); line-height:1.1;
+  margin-bottom:.6rem;
+}
+
+/* ============================================================
+   14. KONTAKT
+   ============================================================ */
+.contact{ background:var(--surface); }
+.contact__grid{
+  display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);
+  gap:clamp(2.5rem, 7vw, 6rem);
+}
+.contact__title{ font-size:clamp(3rem, 7vw, 5.5rem); margin-bottom:1.4rem; }
+.contact__aside p + p{ margin-top:1.1rem; }
+
+.form{ display:grid; gap:1.4rem; }
+.field{ display:grid; gap:.5rem; }
+.field label{
+  font-size:.72rem; font-weight:500; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted);
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  padding:.9rem 0;
+  background:transparent;
+  border:0; border-bottom:1px solid rgba(232,214,172,.18);
+  border-radius:0;
+  color:var(--bone);
+  font-size:1rem;
+  transition:border-color .35s var(--ease-soft);
+}
+.field select{ padding-right:1.5rem; -webkit-appearance:none; appearance:none;
+  background-image:linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
+  background-position:calc(100% - 10px) calc(50% + 2px), calc(100% - 5px) calc(50% + 2px);
+  background-size:5px 5px, 5px 5px; background-repeat:no-repeat;
+}
+.field select option{ background:var(--surface-2); color:var(--bone); }
+.field textarea{ resize:vertical; min-height:7rem; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus{ outline:none; border-bottom-color:var(--gold); }
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible{ outline:2px solid var(--gold); outline-offset:4px; }
+.field.has-error input,
+.field.has-error select,
+.field.has-error textarea{ border-bottom-color:var(--coral); }
+.field__err{
+  font-size:.75rem; color:var(--coral); min-height:1em;
+}
+.form__row{ display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+.form__status{
+  font-size:.85rem; color:var(--gold-light); min-height:1.4em;
+}
+.form__status.is-err{ color:var(--coral); }
+
+.signoff{
+  margin-top:clamp(4rem, 10vh, 7rem);
+  display:flex; flex-direction:column; align-items:flex-end; gap:1.6rem;
+}
+.signoff img{
+  width:min(340px, 62%);
+  filter:invert(1) brightness(1.6);
+  opacity:.9;
+}
+
+/* ============================================================
+   15. PATIČKA
+   ============================================================ */
+.foot{
+  background:var(--black);
+  padding-block:clamp(3rem, 7vh, 5rem);
+  padding-bottom:calc(clamp(3rem, 7vh, 5rem) + env(safe-area-inset-bottom));
+}
+.foot__grid{
+  display:grid; grid-template-columns:auto 1fr auto;
+  gap:2.5rem; align-items:center;
+}
+.foot__mark{ height:64px; width:auto; filter:invert(1) brightness(1.5); opacity:.75; }
+.foot__nav{ display:flex; flex-wrap:wrap; gap:.6rem 1.8rem; justify-content:center; }
+.foot__nav a{
+  font-size:.78rem; letter-spacing:.08em; color:var(--muted);
+  padding:.45rem 0;                 /* pohodlný dotykový cíl */
+  transition:color .3s var(--ease-soft);
+}
+.foot__nav a:hover{ color:var(--bone); }
+.foot__meta{ font-size:.74rem; color:var(--muted); letter-spacing:.06em; }
+
+/* ============================================================
+   16. RESPONZIVITA
+   ============================================================ */
+/* ---- do 1080 px: dvousloupce se skládají pod sebe ---- */
+@media (max-width:1080px){
+  .about__grid, .contact__grid{ grid-template-columns:1fr; }
+  .about__figure{ width:min(86%, 430px); }
+  .vita__grid{ grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+  .vita__photo{ grid-row:auto; grid-column:1 / -1; max-height:520px; justify-content:center; }
+  .vita__photo img{ width:auto; max-width:100%; max-height:520px; margin-inline:auto; }
+  .wear__grid{ grid-template-columns:1fr; }
+  .wear__gallery{ max-width:560px; }
+  .onko__story{ grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); }
+  .oprojects{ grid-template-columns:1fr; }
+  .oproject{ display:grid; grid-template-columns:minmax(0,.4fr) minmax(0,1fr); column-gap:2rem; }
+  .oproject__tag, .oproject__name{ grid-column:1; }
+  .oproject p:not(.oproject__tag), .oproject .tlink{ grid-column:2; }
+  .oproject p:not(.oproject__tag){ grid-row:1 / span 2; margin-bottom:1rem; }
+  .onko__support{ grid-template-columns:1fr; }
+  .atelier__bg{ width:70%; }
+  .hero__photo{ width:min(70%, 700px); }
+  .tech__head{ grid-template-columns:1fr; align-items:start; }
+  .media__feature{ grid-template-columns:1fr; }
+}
+@media (max-width:820px){
+  .nav__links{ display:none; }
+  .nav__cta{ display:none; }
+  .nav__burger{ display:block; margin-left:auto; }
+  .nav .nav__shell{
+    max-width:none;
+    padding:.55rem .55rem .55rem 1rem;
+    border-radius:999px;
+    background:rgba(30,27,23,.55);
+    -webkit-backdrop-filter:blur(24px) saturate(160%);
+    backdrop-filter:blur(24px) saturate(160%);
+    border:1px solid rgba(232,214,172,.14);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 18px 50px rgba(0,0,0,.55);
+  }
+  .nav{ padding-top:calc(12px + env(safe-area-inset-top)); }
+  .nav.is-pill .nav__shell{ max-width:none; }
+
+  .hero{ align-items:flex-end; }
+  .hero__photo{ width:100%; left:0; right:0; height:112%; }
+  .hero__photo img{ object-position:56% 6%; }
+  .hero__photo::after{
+    background:linear-gradient(180deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,0) 20%);
+  }
+  .hero::after{ height:58%; }
+  .nav.is-pill .nav__shell{ max-width:none; }
+  .hero__title{ font-size:clamp(3.6rem, 21vw, 8rem); }
+  .about__photo{ width:min(88%, 380px); }
+  .atelier__bg{ width:100%; opacity:.42; }
+  .atelier::after{
+    background:
+      linear-gradient(0deg, var(--surface) 4%, rgba(20,18,16,.55) 45%, rgba(20,18,16,.25) 100%),
+      linear-gradient(180deg, var(--surface) 0%, rgba(20,18,16,0) 22%);
+  }
+  .hero__year{ display:none; }
+  .hero__claim{ max-width:100%; }
+  .hero__inner{ padding-left:clamp(1rem, 5vw, 3rem); }
+  .form__row{ grid-template-columns:1fr; }
+  .foot__grid{ grid-template-columns:1fr; justify-items:center; text-align:center; gap:1.8rem; }
+  .signoff{ align-items:center; }
+
+  /* pilulka přes celou šířku, uvnitř jen monogram a hamburger */
+  .nav__mark img{ height:30px; }
+  .nav.is-pill .nav__mark img{ height:20px; }
+  .about__frame{ left:-10px; top:-10px; }
+  .atelier__title{ font-size:clamp(2.6rem, 12vw, 5rem); }
+  .onko__title{ font-size:clamp(2.3rem, 10vw, 3.4rem); }
+  .video__play{ width:68px; height:68px; }
+  .video__play svg{ width:18px; height:20px; }
+  .contact__title, .about__title, .work__title, .media__title, .path__title{
+    font-size:clamp(2.8rem, 13vw, 5rem);
+  }
+}
+
+/* ---- do 640 px: telefony ---- */
+@media (max-width:640px){
+  .section{ padding-block:clamp(4rem, 10vh, 6.5rem); }
+  .work{ padding-block:3.5rem 2.75rem; }
+  .strip{ padding-block:1.5rem; }
+  .strip__item{ padding-inline:1.35rem; }
+  .strip__item img{ height:22px; }
+  .strip__item img.s-filandr{ height:26px; }
+  .strip__item img.s-drsny{ height:32px; }
+  .strip__item img.s-ostrihano{ height:22px; }
+  .strip__item{ padding-inline:1.2rem; }
+  .strip__item--txt{ font-size:1.4rem; }
+
+  .about__figure{ width:100%; }
+  .stat__num{ min-width:2.1em; font-size:clamp(2.3rem, 12vw, 3rem); }
+  .stat__label{ font-size:.8rem; max-width:none; }
+
+  .vita__grid{ grid-template-columns:1fr; }
+  .vbox__pillars{ grid-template-columns:1fr; }
+  .vbox__pillars li, .vbox__pillars li + li{ padding:.75rem 0; border-left:0; border-bottom:1px solid rgba(232,214,172,.10); }
+  .vbox__pillars li:last-child{ border-bottom:0; padding-bottom:0; }
+  .onko__story{ grid-template-columns:1fr; }
+  .onko__photo{ width:min(100%, 360px); }
+  .oproject{ display:flex; }
+  .tech__steps, .tech__body{ grid-template-columns:1fr; }
+  .tl{ padding-left:1.75rem; }
+  .tl__item::before{ left:calc(-1.75rem - 3px); }
+  .show{ padding-block:.8rem; }
+  .show__name{ flex-direction:column; align-items:flex-start; gap:.1rem; }
+  .media__feature{ margin-top:2.5rem; }
+  .signoff img{ width:min(300px, 78%); }
+  .foot__mark{ height:54px; }
+
+  section[id]{ scroll-margin-top:80px; }
+  .about__grid{ gap:2.25rem; }
+  .contact__grid{ gap:2.25rem; }
+  .onko__story{ gap:2rem; }
+  .field input, .field select, .field textarea{ padding:.85rem 0; }
+}
+
+/* ---- do 480 px: nejmenší displeje ---- */
+@media (max-width:480px){
+  .hero__inner{ padding-left:.75rem; }
+  .hero__cta{ flex-direction:column; align-items:stretch; }
+  .hero__cta .btn{ width:100%; }
+  .block__cta{ flex-direction:column; align-items:flex-start; gap:1rem; }
+  .block__cta .btn{ width:100%; }
+  .form .btn{ width:100%; }
+  .btn{ padding:.9rem 1.25rem; font-size:.72rem; }
+  .hero__rule{ width:78%; }
+  .mmenu a{ font-size:clamp(2.2rem, 12vw, 3.2rem); }
+  .onko__quote q{ font-size:1.35rem; }
+  .onko__support .btn{ width:100%; }
+  .strip__item{ padding-inline:1rem; }
+  .shows b{ font-size:1.7rem; }
+  .tl__h{ font-size:1.5rem; }
+  .foot__nav{ gap:.2rem 1.25rem; }
+  .signoff{ margin-top:3rem; }
+}
+
+/* ---- telefon a tablet na výšku: portrét nahoře, jméno najíždí přes jeho spodní hranu.
+        Fotka je detail obličeje, takže text ji nesmí překrýt – proto pod sebou, ne přes sebe. ---- */
+@media (max-width:820px) and (orientation:portrait){
+  .hero{
+    display:block; min-height:0;
+    padding-bottom:clamp(3.5rem, 10vh, 5.5rem);
+  }
+  .hero::after{ display:none; }
+  .hero__photo{
+    position:relative; top:auto; right:auto; left:auto;
+    width:100%; height:auto;
+    aspect-ratio:4/5; max-height:78svh;
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(180deg, #000 58%, rgba(0,0,0,.55) 80%, transparent 100%);
+    mask-image:linear-gradient(180deg, #000 58%, rgba(0,0,0,.55) 80%, transparent 100%);
+  }
+  /* rezerva 6 % pro parallax, aby se pod fotkou neotevřela mezera */
+  .hero__photo img{ height:106%; object-position:50% 0; }
+  .hero__photo::after{
+    background:
+      linear-gradient(180deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 18%),
+      linear-gradient(0deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 34%);
+  }
+  .hero__inner{
+    margin-top:calc(clamp(3.6rem, 21vw, 8rem) * -1.15);
+    padding-inline:var(--gut);
+  }
+}
+
+/* ---- telefon naležato: hero se musí vejít do nízkého výřezu ---- */
+@media (max-height:520px) and (orientation:landscape){
+  .hero{ min-height:auto; padding-top:7rem; padding-bottom:3rem; }
+  .hero__title{ font-size:clamp(2.6rem, 9vw, 5rem); }
+  .hero__claim{ font-size:.95rem; margin-bottom:1.5rem; }
+  .hero__rule{ margin-bottom:1.25rem; }
+  .hero__photo{ height:100%; width:50%; left:auto; right:0; }
+  .hero__photo img{ object-position:50% 12%; }
+  .hero__photo::after{
+    background:linear-gradient(90deg, #000 0%, rgba(0,0,0,.8) 14%, rgba(0,0,0,0) 50%);
+  }
+  .hero__inner{ padding-right:var(--gut); }
+  .mmenu{ padding-top:5rem; }
+  .mmenu a{ font-size:clamp(1.6rem, 7vw, 2.4rem); }
+}
+/* ============================================================
+   17. REDUKOVANÝ POHYB – povinné
+   ============================================================ */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+  .strip__track{ animation:none; }
+  .pre{ display:none !important; }
+  .nav__mark img{ opacity:1 !important; }
+}
+</style>
+</head>
+
+<body id="top">
+
+<!-- ============================================================
+     PRELOADER
+     ============================================================ -->
+<div class="pre" id="pre" aria-hidden="true">
+  <img class="pre__sig" id="preSig" src="assets/signature-lg.webp" alt="" width="1600" height="704">
+  <span class="pre__nib" id="preNib"></span>
+</div>
+<script>
+  /* Preloader běží jen jednou za relaci a nikdy při reduced-motion. */
+  (function(){
+    try{
+      var skip = sessionStorage.getItem('pf_intro') === '1';
+      var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (skip || rm) document.documentElement.classList.add('pre-done');
+    }catch(e){ /* sessionStorage může být blokované – intro prostě poběží */ }
+  })();
+</script>
+<noscript><style>.pre{display:none}.nav__mark img{opacity:1}</style></noscript>
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header class="nav" id="nav">
+  <div class="nav__shell" id="navShell">
+    <a class="nav__mark" id="navMark" href="#top" aria-label="Pavel Filandr, na začátek">
+      <img src="assets/signature.webp" alt="" width="900" height="393">
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Hlavní navigace">
+      <span class="nav__pill" id="navPill" aria-hidden="true"></span>
+      <a href="#profil">Profil</a>
+      <a href="#projekty">Projekty</a>
+      <a href="#onkolehko">Onkolehko</a>
+      <a href="#media">Média</a>
+      <a href="#cesta">Cesta</a>
+    </nav>
+
+    <a class="btn nav__cta" href="#kontakt">Spolupráce</a>
+
+    <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="mmenu" aria-label="Otevřít menu">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mmenu" id="mmenu" hidden>
+  <nav aria-label="Mobilní navigace">
+    <a href="#profil">Profil</a>
+    <a href="#projekty">Projekty</a>
+    <a href="#onkolehko">Onkolehko</a>
+    <a href="#media">Média</a>
+    <a href="#cesta">Cesta</a>
+  </nav>
+  <div class="mmenu__foot">
+    <a class="btn btn--gold" href="#kontakt" style="font-size:.78rem">Spolupráce</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero__photo" id="heroPhoto">
+      <img src="assets/pavel-portrait.webp" alt="Pavel Filandr v černém tričku, ruce sepjaté u tváře, studiový portrét na šedém pozadí" width="900" height="1349" fetchpriority="high">
+    </div>
+
+    <div class="wrap hero__inner">
+      <h1 class="d hero__title" id="heroTitle">
+        <span><i>Pavel</i></span>
+        <span class="l2"><i>Filandr</i></span>
+      </h1>
+      <hr class="hairline hero__rule">
+      <p class="hero__claim"><span class="micro hero__since">Od roku 2001</span>Kadeřník, vizážista, stylista, technolog, edukátor a&nbsp;podnikatel.</p>
+      <div class="hero__cta">
+        <a class="btn btn--gold" href="#projekty" data-magnetic>Poznat projekty</a>
+        <a class="btn" href="#kontakt" data-magnetic>Spolupráce</a>
+      </div>
+    </div>
+
+    <div class="hero__year" aria-hidden="true">2026</div>
+  </section>
+
+  <!-- ============================================================
+       LOGO LIŠTA
+       ============================================================ -->
+  <section class="strip" aria-label="Značky a projekty">
+    <div class="strip__track" id="stripTrack">
+      <div class="strip__row" id="stripRow">
+        <span class="strip__item"><img src="assets/logo-vitalium-white.webp" alt="Vitalium" width="500" height="178" loading="lazy"></span>
+        <span class="strip__item"><img src="assets/logo-onkolehko.webp" alt="Onkolehko" width="620" height="135" loading="lazy"></span>
+        <span class="strip__item"><img class="inv s-filandr" src="assets/logo-filandr-wordmark.webp" alt="Filandr pózovací plavky" width="1000" height="241" loading="lazy"></span>
+        <span class="strip__item"><img class="s-drsny" src="assets/logo-drsny-stylista.webp" alt="Drsný stylista" width="493" height="245" loading="lazy"></span>
+        <span class="strip__item"><img class="s-ostrihano" src="assets/logo-ostrihano.webp" alt="Ostříháno" width="620" height="148" loading="lazy"></span>
+        <span class="strip__item strip__item--txt">New&nbsp;Flag</span>
+      </div>
+      <!-- druhá kopie pro plynulou smyčku, doplní JS -->
+    </div>
+  </section>
+
+  <!-- ============================================================
+       O MNĚ
+       ============================================================ -->
+  <section class="section about" id="profil" aria-labelledby="aboutTitle">
+    <img class="about__sig" src="assets/signature.webp" alt="" aria-hidden="true" width="900" height="393" loading="lazy">
+    <div class="wrap">
+      <h2 class="d about__title" id="aboutTitle">Profil</h2>
+
+      <div class="about__grid">
+      <figure class="about__figure">
+        <span class="about__frame" aria-hidden="true"></span>
+        <span class="about__shot" data-reveal>
+          <img src="assets/pavel-about.webp" alt="Pavel Filandr v černém svetru sedí v denním světle u okna, černobílý portrét" width="800" height="1060" loading="lazy">
+        </span>
+      </figure>
+
+      <div class="about__body">
+        <p class="lead">Pavel Filandr je uznávaný odborník v&nbsp;oblasti kadeřnictví, stylingu, vizáže a&nbsp;profesionální péče o&nbsp;krásu.</p>
+        <p>Původní studia ho sice nasměrovala do hotelnictví, jeho skutečnou profesí se ale stal svět krásy. Během více než pětadvaceti let praxe se vypracoval mezi špičky svého oboru v&nbsp;Česku. Vedle práce kadeřníka a&nbsp;vizážisty se postupně stal také vyhledávaným technologem, odborným lektorem a&nbsp;školitelem, jehož zkušeností využívají profesionálové doma i&nbsp;v&nbsp;zahraničí. Po složení zkoušek znaleckého minima na Univerzitě Karlově je navíc jako jeden z&nbsp;mála kadeřníků v&nbsp;České republice soudním znalcem v&nbsp;oboru kadeřnictví.</p>
+        <p>Jeho působení dnes výrazně přesahuje samotný svět krásy. Dlouholeté zkušenosti z&nbsp;beauty segmentu propojuje se vzděláváním, zdravým životním stylem, vývojem produktů i&nbsp;společensky prospěšnými projekty na pomoc těm, kdo ji potřebují nejvíce.</p>
+
+        <div class="about__stats">
+          <div class="stat">
+            <span class="stat__num" data-count="25" data-suffix="+">0</span>
+            <span class="stat__label">let v&nbsp;oboru</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="4">0</span>
+            <span class="stat__label">vlastní projekty</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="4">0</span>
+            <span class="stat__label">pořady v&nbsp;televizi a&nbsp;na internetu</span>
+          </div>
+          <div class="stat">
+            <span class="stat__num" data-count="1">0</span>
+            <span class="stat__label">tábor pro děti po onkologické léčbě</span>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       PROJEKTY
+       ============================================================ -->
+  <section id="projekty" aria-labelledby="workTitle">
+    <div class="work">
+      <div class="wrap">
+        <h2 class="d work__title" id="workTitle">Projekty</h2>
+      </div>
+    </div>
+
+    <!-- 1) Vitalium – produktový blok rozdělený do boxů -->
+    <div class="vita section" aria-labelledby="vitaTitle">
+      <div class="wrap">
+        <div class="vita__head">
+          <img class="vita__logo" src="assets/logo-vitalium-white.webp" alt="Vitalium" width="500" height="178" loading="lazy">
+          <h3 class="d vita__title" id="vitaTitle">Doplňky, kterým věří sám</h3>
+        </div>
+        <div class="vita__grid">
+          <figure class="vita__photo" data-reveal>
+            <img src="assets/pavel-hairvital.webp" alt="Pavel Filandr drží dózu doplňku stravy HairVital Women od značky Vitalium" width="760" height="816" loading="lazy">
+          </figure>
+          <div class="vbox vbox--why">
+            <h4 class="vbox__h">Proč Vitalium</h4>
+            <p>Značku Vitalium založil z&nbsp;osobního přesvědčení, že i&nbsp;v&nbsp;České republice lze vytvořit doplněk stravy, který bude stát na kvalitě, funkčnosti a&nbsp;skutečných výsledcích. Právě produkt HairVital Women se stal důkazem této myšlenky.</p>
+            <ul class="vbox__pillars">
+              <li>Kvalita</li>
+              <li>Funkčnost</li>
+              <li>Skutečné výsledky</li>
+            </ul>
+          </div>
+          <div class="vbox vbox--product">
+            <h4 class="vbox__h">HairVital Women</h4>
+            <p>Svým složením a&nbsp;hlavně účinkem si postupně získal důvěru profesionálních kadeřníků, kteří dokážou výsledky posoudit odborným okem, a&nbsp;především samotných klientek. HairVital Women tak dokázal, že i&nbsp;český produkt obstojí v&nbsp;náročné profesionální konkurenci a&nbsp;přesvědčí kvalitou i&nbsp;zkušenostmi zákaznic.</p>
+            <div class="block__cta">
+              <a class="btn btn--gold" href="https://www.vitalium.cz/product/hairvital-women/" target="_blank" rel="noopener" data-magnetic>Koupit HairVital Women</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3) Atelier Pavla Filandra -->
+    <div class="atelier" aria-labelledby="atelierTitle">
+      <img class="atelier__bg" src="assets/pavel-atelier.webp" alt="Pavel Filandr sedící na židli v tmavém fotografickém ateliéru" width="980" height="1470" loading="lazy">
+      <div class="wrap atelier__inner">
+        <h3 class="d atelier__title" id="atelierTitle">Atelier<br>Pavla Filandra</h3>
+        <div class="atelier__text">
+          <p class="lead">Pavel Filandr provozuje privátní kadeřnický ateliér v&nbsp;Praze.</p>
+          <p>Objednání probíhá po předchozí domluvě a&nbsp;individuální konzultaci. Každá návštěva tak dostane maximum péče, klidu a&nbsp;osobního přístupu.</p>
+          <p>Ateliér se zaměřuje na komplexní proměny, precizní střih, odbornou péči o&nbsp;vlasy a&nbsp;individuální styling s&nbsp;důrazem na celkový vzhled a&nbsp;osobnost klienta.</p>
+        </div>
+        <div class="block__cta">
+          <a class="btn btn--gold" href="https://www.facebook.com/p/Pavel-Filandr-Technologist-100069354001400/?locale=cs_CZ" target="_blank" rel="noopener" data-magnetic>Ateliér na Facebooku</a>
+          <a class="tlink" href="#kontakt" data-subject="atelier">Objednat se</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4) Filandr – závodní pózovací plavky: text vlevo, závodníci vpravo -->
+    <div class="wear" aria-labelledby="wearTitle">
+      <div class="wrap wear__grid">
+        <div class="wear__inner">
+          <h3 class="wear__title" id="wearTitle">
+            <img src="assets/logo-filandr-wordmark.webp" alt="Filandr, pózovací plavky, založeno roku 2001" width="1000" height="241" loading="lazy">
+          </h3>
+          <div class="wear__text">
+            <p class="lead">Od roku 2001 se značka Filandr specializuje na výrobu závodních pózovacích plavek pro kulturistiku a&nbsp;fitness, pro ženy i&nbsp;muže.</p>
+            <p>Každý model vzniká s&nbsp;důrazem na perfektní střih, proporce postavy, detail a&nbsp;maximální efekt na soutěžním pódiu. Díky pětadvacetiletým zkušenostem patří značka Filandr ke špičce evropského trhu se závodními plavkami a&nbsp;obléká amatérské i&nbsp;profesionální závodníky.</p>
+          </div>
+          <div class="block__cta">
+            <a class="btn btn--gold" href="https://www.filandrwear.cz/" target="_blank" rel="noopener" data-magnetic>Navštívit filandrwear.cz</a>
+          </div>
+        </div>
+        <div class="wear__gallery">
+          <figure class="wear__shot"><img src="assets/athlete-1.webp" alt="Kulturista v tyrkysových závodních pózovacích plavkách na pódiu" width="400" height="600" loading="lazy"></figure>
+          <figure class="wear__shot"><img src="assets/athlete-2.webp" alt="Kulturista s medailí v černých třpytivých závodních plavkách na pódiu" width="400" height="600" loading="lazy"></figure>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5) Odborný technolog a edukátor -->
+    <div class="tech" aria-labelledby="techTitle">
+      <div class="wrap">
+        <div class="tech__head">
+          <h3 class="d tech__title" id="techTitle">Odborný technolog<br>a&nbsp;edukátor</h3>
+          <p class="lead tech__intro">V&nbsp;oblasti profesionální vlasové kosmetiky působí Pavel Filandr jako technolog a&nbsp;odborný edukátor již více než deset let.</p>
+        </div>
+
+        <ol class="tech__steps">
+          <li class="tech__step">
+            <p class="tech__years"><span class="tech__num">3</span><span class="micro">roky</span></p>
+            <h4 class="tech__co">SP Venture</h4>
+            <p>První tři roky získával zkušenosti ve společnosti SP Venture, kde pracoval se značkami LABEL.M, Inebrya, Jean Paul Mynè a&nbsp;řadou dalších profesionálních kadeřnických značek.</p>
+          </li>
+          <li class="tech__step">
+            <p class="tech__years"><span class="tech__num">7</span><span class="micro">let · hlavní technolog</span></p>
+            <h4 class="tech__co">New Flag</h4>
+            <p>Následujících sedm let působil jako hlavní technolog společnosti New Flag, kde měl možnost pracovat s&nbsp;významnými světovými značkami, jako jsou OLAPLEX, O&amp;M (Original &amp; Mineral), Maria Nila, evo, Urban Alchemy a&nbsp;mnoho dalších.</p>
+          </li>
+        </ol>
+
+        <div class="tech__body">
+          <p>Díky dlouholeté práci napříč značkami, technologiemi, barvicími systémy i&nbsp;řadami profesionální vlasové péče získal mimořádně široký přehled o&nbsp;vlasové kosmetice. Především ale dokáže objektivně porovnat kvalitu, složení, technologii i&nbsp;skutečnou účinnost jednotlivých produktů v&nbsp;každodenní salonní praxi.</p>
+          <p>Své zkušenosti dlouhodobě předává profesionálním kadeřníkům prostřednictvím odborných školení, seminářů a&nbsp;praktické edukace. Spojení mnohaleté práce za kadeřnickým křeslem s&nbsp;technologickými znalostmi mu umožňuje hodnotit produkty ne podle marketingových slibů, ale podle toho, jak skutečně fungují na vlasech v&nbsp;rukou profesionála.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ONKOLEHKO
+       ============================================================ -->
+  <section class="onko" id="onkolehko" aria-labelledby="onkoTitle" data-soft>
+    <div class="wrap onko__inner">
+      <div class="onko__head">
+        <img class="onko__logo" src="assets/logo-onkolehko.webp" alt="Onkolehko, Onkologické volnočasové centrum" width="620" height="135" loading="lazy">
+        <h2 class="d onko__title" id="onkoTitle">Síla, klid a&nbsp;radost tam, kde chybí nejvíc</h2>
+      </div>
+
+      <div class="onko__story">
+        <figure class="onko__photo">
+          <img src="assets/pavel-onko.webp" alt="Pavel Filandr se usmívá, černobílý portrét ze svrchního pohledu" width="700" height="1050" loading="lazy">
+          <blockquote class="onko__quote">
+            <q>Přinášet sílu, klid a&nbsp;radost tam, kam dolehlo onkologické onemocnění.</q>
+          </blockquote>
+        </figure>
+        <div class="onko__body">
+          <p class="lead">Onkologické volnočasové centrum, z.&nbsp;s., veřejnosti známé jako ONKOLEHKO, přináší sílu, klid a&nbsp;radost dětem, dospělým i&nbsp;jejich rodinám, jejichž životy zasáhlo onkologické onemocnění.</p>
+          <p>Organizace navazuje na charitativní akce, které vznikaly ve spolupráci s&nbsp;dětskou onkologií Fakultní nemocnice v&nbsp;Motole. Pavel Filandr je hrdým pokračovatelem této iniciativy. Pro aktivity spolku poskytuje zázemí ve svém Resortu pod Landštejnem v&nbsp;České Kanadě, kde spolu s&nbsp;týmem a&nbsp;dobrovolníky organizuje rehabilitační, odpočinkové a&nbsp;podpůrné pobyty.</p>
+        </div>
+      </div>
+
+      <div class="onko__projects">
+        <h3 class="onko__sub">Projekty spolku</h3>
+        <ul class="oprojects">
+          <li class="oproject">
+            <p class="oproject__tag">Pro děti</p>
+            <h4 class="oproject__name">Nádech svobody</h4>
+            <p>Týdenní letní tábor pro děti po onkologické léčbě v&nbsp;Resortu pod Landštejnem. Pod dohledem zkušených vedoucích a&nbsp;zdravotníka zažijí přírodu, nová přátelství a&nbsp;radost.</p>
+            <a class="tlink" href="https://onkolehko.cz/projekt/nadech-svobody/" target="_blank" rel="noopener">Více o&nbsp;táboře</a>
+          </li>
+          <li class="oproject">
+            <p class="oproject__tag">Pro rodiny</p>
+            <h4 class="oproject__name">Znovu spolu</h4>
+            <p>Ozdravné pobyty pro rodiny, které zasáhla rakovina. Společný čas v&nbsp;přírodě, klid a&nbsp;psychologická i&nbsp;terapeutická podpora, aby rodina znovu našla jeden druhého.</p>
+            <a class="tlink" href="https://onkolehko.cz/projekt/znovu-spolu/" target="_blank" rel="noopener">Více o&nbsp;pobytech</a>
+          </li>
+          <li class="oproject">
+            <p class="oproject__tag">Pro všechny</p>
+            <h4 class="oproject__name">Společně pro naději</h4>
+            <p>Charitativní běhy, benefiční koncerty, výstavy, workshopy i&nbsp;dražby. Výtěžek z&nbsp;akcí jde na podporu onkologických pacientů.</p>
+            <a class="tlink" href="https://onkolehko.cz/projekt/spolecne-pro-nadeji/" target="_blank" rel="noopener">Více o&nbsp;akcích</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="onko__support">
+        <div>
+          <h3 class="onko__support-title">Podpořte Onkolehko</h3>
+          <p>Darem pomůžete uspořádat tábory, pobyty a&nbsp;akce pro děti a&nbsp;rodiny, kterým do života vstoupila rakovina. Přispět můžete přes QR kód na webu spolku nebo přímo na účet <span class="onko__acct">7057039389/0800</span>.</p>
+        </div>
+        <div class="block__cta">
+          <a class="btn btn--teal" href="https://onkolehko.cz/projekty/" target="_blank" rel="noopener" data-magnetic>Podpořit Onkolehko</a>
+          <a class="tlink" href="https://onkolehko.cz/kontakt/" target="_blank" rel="noopener">Napsat spolku</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MÉDIA A TELEVIZE
+       ============================================================ -->
+  <section class="section media" id="media" aria-labelledby="mediaTitle">
+    <div class="wrap">
+      <h2 class="d media__title" id="mediaTitle">Média<br>a&nbsp;televize</h2>
+
+      <ul class="shows">
+        <li><a class="show" href="https://www.youtube.com/results?search_query=Drsn%C3%BD+Stylista+d%C3%ADl" target="_blank" rel="noopener">
+          <span class="show__name"><b>Drsný stylista</b><em>TV Harmonie · díly na YouTube</em></span><span class="show__go">Sledovat</span>
+        </a></li>
+        <!-- Ostříháno a Popelka: veřejně dostupný díl s Pavlem nemáme, řádky jsou bez prokliku.
+             Až bude odkaz, stačí obsah obalit do <a class="show" href="..."> jako u ostatních. -->
+        <li><div class="show show--static">
+          <span class="show__name"><b>Ostříháno</b><em>TV Barrandov</em></span>
+        </div></li>
+        <li><div class="show show--static">
+          <span class="show__name"><b>Popelka</b><em>TV Barrandov</em></span>
+        </div></li>
+        <li><a class="show" href="https://www.stream.cz/tipy-a-triky-od-kadernika" target="_blank" rel="noopener">
+          <span class="show__name"><b>Tipy a&nbsp;triky od kadeřníka</b><em>autorský pořad · Stream.cz</em></span><span class="show__go">Sledovat</span>
+        </a></li>
+      </ul>
+      <p class="media__jury">Porotce celostátních soutěží krásy.</p>
+
+      <div class="media__feature">
+        <div class="video" id="video" data-embed="https://iframe.mediadelivery.net/embed/77959/7641ccba-4b59-4a65-a654-fc0462e4914b?autoplay=true&amp;preload=true">
+          <img class="video__poster" src="assets/video-poster.webp" alt="" aria-hidden="true" width="960" height="1440" loading="lazy">
+          <div class="video__inner" id="videoInner">
+            <button class="video__play" id="videoPlay" type="button" aria-label="Přehrát rozhovor z pořadu Dobrý večer s A11">
+              <svg viewBox="0 0 22 24" aria-hidden="true"><path d="M0 0v24l22-12z"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="media__feature-txt">
+          <p class="micro">Rozhovor · A11 TV</p>
+          <h3 class="media__feature-title">Dobrý večer s&nbsp;A11</h3>
+          <p>Pavel Filandr byl hostem večerního rozhovorového pořadu televize A11, vysílaného v&nbsp;červenci 2026.</p>
+          <a class="tlink" href="https://tv.a11.cz/video/22810-pavel-filandr-petra-horvathova-miluse-vapenikova-natalie-vapenikova-vladimir-jirovec/" target="_blank" rel="noopener">Pustit na tv.a11.cz</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CESTA – timeline
+       ============================================================ -->
+  <section class="section path" id="cesta" aria-labelledby="pathTitle">
+    <div class="wrap">
+      <h2 class="d path__title" id="pathTitle">Cesta</h2>
+
+      <div class="tl" id="tl">
+        <span class="tl__rail" aria-hidden="true"><i id="tlLine"></i></span>
+        <ol class="tl__list">
+        <li class="tl__item">
+          <span class="micro tl__step">01</span>
+          <h3 class="tl__h">Počátky a&nbsp;odborný růst</h3>
+          <p>Odborné vzdělání, tuzemské i&nbsp;zahraniční rekvalifikace a&nbsp;stáže v&nbsp;kadeřnictví a&nbsp;vizážistice.</p>
+        </li>
+        <li class="tl__item">
+          <span class="micro tl__step">02</span>
+          <h3 class="tl__h">Rozvoj podnikání</h3>
+          <p>Vlastní salon s&nbsp;početným týmem, později i&nbsp;zkušenosti z&nbsp;gastronomie.</p>
+        </li>
+        <li class="tl__item">
+          <span class="micro tl__step">03</span>
+          <h3 class="tl__h">Praha a&nbsp;média</h3>
+          <p>Stabilní postavení na pražském trhu, otevření prestižního salonu, dlouholeté působení v&nbsp;televizních a&nbsp;internetových pořadech.</p>
+        </li>
+        <li class="tl__item">
+          <span class="micro tl__step">04</span>
+          <h3 class="tl__h">Zdraví a&nbsp;filantropie</h3>
+          <p>Vstup do oblasti zdravého životního stylu se značkou Vitalium a&nbsp;zapojení vlastního Resortu pod Landštejnem do činnosti Onkolehka.</p>
+        </li>
+        <li class="tl__item">
+          <span class="micro tl__step">05</span>
+          <h3 class="tl__h">Technolog a&nbsp;edukátor</h3>
+          <p>Deset let jako technolog a&nbsp;edukátor profesionální vlasové kosmetiky ve společnostech SP Venture a&nbsp;New Flag.</p>
+        </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       KONTAKT
+       ============================================================ -->
+  <section class="section contact" id="kontakt" aria-labelledby="contactTitle">
+    <div class="wrap">
+      <div class="contact__grid">
+        <div class="contact__aside">
+          <h2 class="d contact__title" id="contactTitle">Ozvěte se</h2>
+          <p class="lead">Pavel Filandr přijímá poptávky na spolupráci se značkami, mediální vystoupení, přednášky a&nbsp;školení pro profesionály.</p>
+          <p>Stejnou cestou se můžete objednat i&nbsp;do ateliéru. Napište, co potřebujete, a&nbsp;ozveme se co nejdřív.</p>
+        </div>
+
+        <form class="form" id="form" novalidate>
+          <div class="form__row">
+            <div class="field">
+              <label for="f-name">Jméno</label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name">
+              <span class="field__err" id="e-name"></span>
+            </div>
+            <div class="field">
+              <label for="f-mail">E‑mail</label>
+              <input id="f-mail" name="email" type="email" autocomplete="email" required aria-describedby="e-mail">
+              <span class="field__err" id="e-mail"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-subject">Předmět</label>
+            <select id="f-subject" name="subject" required aria-describedby="e-subject">
+              <option value="">Vyberte téma</option>
+              <option value="spoluprace">Spolupráce</option>
+              <option value="media">Média</option>
+              <option value="atelier">Ateliér</option>
+              <option value="onkolehko">Onkolehko</option>
+            </select>
+            <span class="field__err" id="e-subject"></span>
+          </div>
+
+          <div class="field">
+            <label for="f-msg">Zpráva</label>
+            <textarea id="f-msg" name="message" rows="5" required aria-describedby="e-msg"></textarea>
+            <span class="field__err" id="e-msg"></span>
+          </div>
+
+          <div>
+            <button class="btn btn--gold" type="submit" data-magnetic>Odeslat zprávu</button>
+          </div>
+          <p class="form__status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <div class="signoff">
+        <img src="assets/signature.webp" alt="Podpis Pavel Filandr" width="900" height="393" loading="lazy">
+        <hr class="hairline" style="width:100%">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================================================
+     PATIČKA
+     ============================================================ -->
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <img class="foot__mark" src="assets/logo-filandr-mark.webp" alt="Monogram Pavel Filandr" width="480" height="353" loading="lazy">
+    <nav class="foot__nav" aria-label="Odkazy v patičce">
+      <a href="https://vitalium.cz" target="_blank" rel="noopener">Vitalium</a>
+      <a href="#onkolehko">Onkolehko</a>
+      <a href="https://www.facebook.com/p/Pavel-Filandr-Technologist-100069354001400/?locale=cs_CZ" target="_blank" rel="noopener">Ateliér</a>
+      <a href="https://www.filandrwear.cz/" target="_blank" rel="noopener">Filandr Wear</a>
+      <a href="#kontakt">Kontakt</a>
+      <a href="https://www.instagram.com/pavel_filandr_technologist/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/pavel.filandr/" target="_blank" rel="noopener">Facebook</a>
+    </nav>
+    <p class="foot__meta">© 2026 Pavel Filandr</p>
+  </div>
+</footer>
+
+<div class="grain" aria-hidden="true"></div>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Person",
+  "name":"Pavel Filandr",
+  "jobTitle":"Kadeřník, vizážista, stylista, technolog, edukátor a soudní znalec v oboru kadeřnictví",
+  "description":"Kadeřník, vizážista, stylista, technolog a edukátor s více než pětadvacetiletou praxí, soudní znalec v oboru kadeřnictví. Zakladatel značky Vitalium a značky závodních pózovacích plavek Filandr, provozovatel ateliéru v Praze a pokračovatel charitativní iniciativy Onkolehko.",
+  "nationality":"CZ",
+  "knowsAbout":["kadeřnictví","styling","vizážistika","profesionální vlasová kosmetika","znalectví v oboru kadeřnictví","doplňky stravy","filantropie"],
+  "sameAs":["https://vitalium.cz","https://www.filandrwear.cz/","https://www.instagram.com/pavel_filandr_technologist/","https://www.facebook.com/pavel.filandr/"]
+}
+</script>
+
+<!-- Knihovny -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js" defer></script>
+
+<script defer>
+document.addEventListener('DOMContentLoaded', function(){
+  'use strict';
+
+  var REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var TOUCH   = window.matchMedia('(hover: none)').matches;
+  var hasGSAP = !!(window.gsap && window.ScrollTrigger);
+  if (hasGSAP) gsap.registerPlugin(ScrollTrigger);
+
+  var $  = function(s, c){ return (c||document).querySelector(s); };
+  var $$ = function(s, c){ return Array.prototype.slice.call((c||document).querySelectorAll(s)); };
+
+  /* Výchozí stavy hero sekce nastavuje JS, ne CSS – bez JS zůstane obsah viditelný. */
+  if (hasGSAP && !REDUCED){
+    gsap.set('.hero__title span > i', { yPercent:110 });
+    gsap.set(['.hero__rule','.hero__claim','.hero__cta','.hero__year'], { opacity:0, y:18 });
+  }
+
+  /* --------------------------------------------------------
+     1. LENIS – plynulý scroll
+     -------------------------------------------------------- */
+  var lenis = null;
+  if (!REDUCED && window.Lenis){
+    lenis = new Lenis({ lerp:0.09, wheelMultiplier:1, smoothWheel:true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    if (hasGSAP){
+      lenis.on('scroll', ScrollTrigger.update);
+      gsap.ticker.lagSmoothing(0);
+    }
+  }
+
+  /* Kotvy – přes Lenis, jinak nativně */
+  $$('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if (id === '#' ) return;
+      var target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      closeMenu();
+      // Předvyplnění předmětu formuláře u CTA „Podpořit Onkolehko“
+      var subj = a.getAttribute('data-subject');
+      if (subj){ var sel = $('#f-subject'); if (sel) sel.value = subj; }
+      if (lenis) lenis.scrollTo(target, { offset:-90, duration:1.2 });
+      else target.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block:'start' });
+    });
+  });
+
+  /* --------------------------------------------------------
+     2. PRELOADER – podpis se vykreslí, přiblíží se za okraje obrazovky a naskočí stránka
+     -------------------------------------------------------- */
+  var pre = $('#pre'), preSig = $('#preSig'), preNib = $('#preNib'), navMark = $('#navMark');
+  var navMarkImg = navMark ? navMark.querySelector('img') : null;
+
+  function finishIntro(){
+    document.documentElement.classList.add('pre-done');
+    if (navMarkImg) navMarkImg.style.opacity = '1';
+    document.body.classList.remove('is-locked');
+    if (hasGSAP) ScrollTrigger.refresh();
+  }
+
+  if (document.documentElement.classList.contains('pre-done') || !hasGSAP || REDUCED){
+    finishIntro();
+  } else {
+    document.body.classList.add('is-locked');
+    if (lenis) lenis.stop();
+
+    var bail = function(){
+      finishIntro(); if (lenis) lenis.start(); revealHero();
+    };
+
+    var runIntro = function(){
+      var sigRect = preSig.getBoundingClientRect();
+      if (!sigRect.height){ bail(); return; }   // rozměr neznáme, intro nemá co animovat
+      // přiblížení: podpis naroste tak, aby jeho tahy přejely celou obrazovku
+      var zoom = Math.max(10, (Math.max(window.innerWidth, window.innerHeight) / sigRect.width) * 9);
+
+      var tl = gsap.timeline({
+        onComplete:function(){
+          try{ sessionStorage.setItem('pf_intro','1'); }catch(e){}
+          finishIntro();
+          if (lenis) lenis.start();
+        }
+      });
+
+      // (1) vykreslení podpisu + zlatý hrot pera na náběžné hraně
+      tl.set(preNib, { opacity:1, x: sigRect.left - (window.innerWidth/2) + 3, y: 0 })
+        .to(preSig, { clipPath:'inset(0 0% 0 0)', duration:1.4, ease:'power1.inOut' }, 0)
+        .to(preNib, {
+              x: sigRect.right - (window.innerWidth/2) - 3,
+              duration:1.4, ease:'power1.inOut'
+            }, 0)
+        .to(preNib, { opacity:0, duration:.2 }, 1.35)
+        // (2) podpis se přiblíží směrem k divákovi až za okraje obrazovky
+        .to(preSig, { scale:zoom, duration:.95, ease:'power3.in' }, 1.6)
+        .to(preSig, { opacity:0, duration:.32, ease:'power1.in' }, 2.23)
+        // (3) a pak naskočí úvodní stránka
+        .to(pre, { opacity:0, duration:.28, ease:'power2.out' }, 2.5)
+        .call(revealHero, [true], 2.5);
+      return tl;
+    };
+
+    // Počkáme na načtení podpisu, ať měříme správný rozměr
+    if (preSig.complete && preSig.naturalWidth) runIntro();
+    else {
+      preSig.addEventListener('load', runIntro, { once:true });
+      preSig.addEventListener('error', bail, { once:true });
+    }
+    // Pojistka: kdyby cokoli selhalo, stránka se odemkne
+    setTimeout(function(){
+      if (!document.documentElement.classList.contains('pre-done')){
+        finishIntro(); if (lenis) lenis.start();
+      }
+      revealHero();
+    }, 4500);
+  }
+
+  /* --------------------------------------------------------
+     3. NAVBAR – sbalení do pilulky + klouzavá aktivní pilulka
+     -------------------------------------------------------- */
+  var nav = $('#nav'), navShell = $('#navShell'), navLinks = $('#navLinks'), navPill = $('#navPill');
+  var linkEls = $$('a', navLinks);
+
+  function onScrollNav(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    nav.classList.toggle('is-pill', y > 80);
+  }
+  onScrollNav();
+  window.addEventListener('scroll', onScrollNav, { passive:true });
+
+  var activeLink = null;
+  function movePill(){
+    if (!activeLink || getComputedStyle(navLinks).display === 'none'){
+      navPill.style.opacity = '0'; return;
+    }
+    navPill.style.opacity = '1';
+    navPill.style.width = activeLink.offsetWidth + 'px';
+    navPill.style.transform = 'translate(' + activeLink.offsetLeft + 'px, -50%)';
+  }
+  function setActive(el){
+    if (activeLink === el) return;
+    linkEls.forEach(function(l){ l.classList.remove('is-active'); });
+    activeLink = el;
+    if (el) el.classList.add('is-active');
+    movePill();
+  }
+  // Pilulka se musí dorovnat i během pružinové animace lišty
+  function syncPill(ms){
+    navPill.classList.add('is-sync');
+    var end = performance.now() + (ms || 750);
+    (function loop(t){
+      movePill();
+      if (t < end) requestAnimationFrame(loop);
+      else navPill.classList.remove('is-sync');
+    })(performance.now());
+  }
+  navShell.addEventListener('mouseenter', function(){ syncPill(750); });
+  navShell.addEventListener('mouseleave', function(){ syncPill(750); });
+  navShell.addEventListener('transitionstart', function(e){ if (e.propertyName === 'max-width') syncPill(750); });
+  window.addEventListener('resize', movePill);
+
+  if (hasGSAP){
+    ['profil','projekty','onkolehko','media','cesta'].forEach(function(id){
+      var sec = document.getElementById(id);
+      var link = navLinks.querySelector('a[href="#' + id + '"]');
+      if (!sec || !link) return;
+      ScrollTrigger.create({
+        trigger: sec, start:'top 45%', end:'bottom 45%',
+        onEnter:     function(){ setActive(link); },
+        onEnterBack: function(){ setActive(link); },
+        onLeaveBack: function(){ if (id === 'profil') setActive(null); }
+      });
+    });
+  }
+
+  /* Mobilní menu */
+  var burger = $('#burger'), mmenu = $('#mmenu');
+  function openMenu(){
+    mmenu.hidden = false; mmenu.classList.add('is-open');
+    burger.setAttribute('aria-expanded','true');
+    burger.setAttribute('aria-label','Zavřít menu');
+    document.body.classList.add('is-locked');
+    if (lenis) lenis.stop();
+    if (hasGSAP && !REDUCED){
+      gsap.fromTo($$('a', mmenu), { yPercent:60, opacity:0 },
+        { yPercent:0, opacity:1, duration:.55, stagger:.06, ease:'power3.out' });
+    }
+  }
+  function closeMenu(){
+    if (!mmenu.classList.contains('is-open')) return;
+    mmenu.classList.remove('is-open'); mmenu.hidden = true;
+    burger.setAttribute('aria-expanded','false');
+    burger.setAttribute('aria-label','Otevřít menu');
+    document.body.classList.remove('is-locked');
+    if (lenis) lenis.start();
+  }
+  burger.addEventListener('click', function(){
+    mmenu.classList.contains('is-open') ? closeMenu() : openMenu();
+  });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
+
+  /* --------------------------------------------------------
+     4. MARQUEE – zdvojení stopy pro nekonečnou smyčku
+     -------------------------------------------------------- */
+  var stripRow = $('#stripRow');
+  if (stripRow){
+    var clone = stripRow.cloneNode(true);
+    clone.setAttribute('aria-hidden','true');
+    clone.removeAttribute('id');
+    stripRow.parentNode.appendChild(clone);
+  }
+
+  /* --------------------------------------------------------
+     5. ANIMACE – jeden režírovaný moment, jinak zdrženlivost
+     -------------------------------------------------------- */
+  var heroRevealed = false;
+  function revealHero(fromIntro){
+    if (heroRevealed) return;
+    heroRevealed = true;
+    if (!hasGSAP || REDUCED) return;
+    // po intru stránka „naskočí“: portrét dosedne z mírného přiblížení
+    if (fromIntro === true){
+      gsap.fromTo('#heroPhoto', { scale:1.07 }, { scale:1, duration:1.1, ease:'power3.out', clearProps:'transform' });
+    }
+    gsap.to('.hero__title span > i',
+      { yPercent:0, duration:1, stagger:.09, ease:'power3.out' });
+    gsap.to(['.hero__rule','.hero__claim','.hero__cta','.hero__year'],
+      { opacity:1, y:0, duration:.8, stagger:.08, delay:.35, ease:'power2.out' });
+  }
+
+  if (hasGSAP && !REDUCED){
+
+    // Hero: pokud intro neběželo, spustíme reveal hned
+    if (document.documentElement.classList.contains('pre-done')) revealHero();
+
+    // Parallax portrétu
+    gsap.to('#heroPhoto img', {
+      yPercent:-6, ease:'none',
+      scrollTrigger:{ trigger:'.hero', start:'top top', end:'bottom top', scrub:true }
+    });
+
+
+    // Odkrytí fotky maskou (ne fade)
+    $$('[data-reveal]').forEach(function(el){
+      gsap.fromTo(el,
+        { clipPath:'inset(0 0 100% 0)' },
+        { clipPath:'inset(0 0 0% 0)', duration:1.1, ease:'power3.out',
+          scrollTrigger:{ trigger:el, start:'top 82%' } });
+      gsap.fromTo(el.querySelector('img'),
+        { scale:1.12 },
+        { scale:1, duration:1.3, ease:'power3.out',
+          scrollTrigger:{ trigger:el, start:'top 82%' } });
+    });
+
+    // Počítadla – jednou, při vstupu do viewportu
+    $$('.stat__num').forEach(function(el){
+      var end = parseFloat(el.getAttribute('data-count')) || 0;
+      var suffix = el.getAttribute('data-suffix') || '';
+      var obj = { v:0 };
+      ScrollTrigger.create({
+        trigger: el, start:'top 88%', once:true,
+        onEnter: function(){
+          gsap.to(obj, {
+            v:end, duration:1.1, ease:'power2.out',
+            onUpdate:function(){ el.textContent = Math.round(obj.v) + suffix; },
+            onComplete:function(){ el.textContent = end + suffix; }
+          });
+        }
+      });
+    });
+
+    // Timeline – zlatá linka se vykresluje podle scrollu
+    gsap.fromTo('#tlLine', { scaleY:0 }, {
+      scaleY:1, ease:'none',
+      scrollTrigger:{ trigger:'#tl', start:'top 72%', end:'bottom 82%', scrub:.6 }
+    });
+
+    // Onkolehko – měkčí, pomalejší nástup než zbytek webu
+    gsap.fromTo('.onko__inner > *',
+      { opacity:0, y:26 },
+      { opacity:1, y:0, duration:1.5, stagger:.16, ease:'sine.out',
+        scrollTrigger:{ trigger:'.onko', start:'top 68%' } });
+
+  } else {
+    // Bez GSAP / s redukovaným pohybem: čísla zobrazíme rovnou
+    $$('.stat__num').forEach(function(el){
+      el.textContent = (el.getAttribute('data-count') || '') + (el.getAttribute('data-suffix') || '');
+    });
+  }
+
+  /* --------------------------------------------------------
+     6. MAGNETICKÝ HOVER TLAČÍTEK (jen myš)
+     -------------------------------------------------------- */
+  if (!TOUCH && !REDUCED && hasGSAP){
+    $$('[data-magnetic]').forEach(function(btn){
+      btn.addEventListener('mousemove', function(e){
+        var r = btn.getBoundingClientRect();
+        var mx = (e.clientX - r.left - r.width/2) / (r.width/2);
+        var my = (e.clientY - r.top - r.height/2) / (r.height/2);
+        gsap.to(btn, { x: mx*6, y: my*6, duration:.35, ease:'power2.out' });
+      });
+      btn.addEventListener('mouseleave', function(){
+        gsap.to(btn, { x:0, y:0, duration:.5, ease:'elastic.out(1, .6)' });
+      });
+    });
+  }
+
+  /* --------------------------------------------------------
+     7. VIDEO – lazy-load iframe
+     -------------------------------------------------------- */
+  var video = $('#video'), videoPlay = $('#videoPlay'), videoInner = $('#videoInner');
+  if (videoPlay){
+    videoPlay.addEventListener('click', function(){
+      var src = (video.getAttribute('data-embed') || '').trim();
+      if (!src) return;
+      var f = document.createElement('iframe');
+      f.src = src;
+      f.title = 'Dobrý večer s A11: rozhovor s Pavlem Filandrem';
+      f.allow = 'accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture';
+      f.allowFullscreen = true;
+      f.loading = 'lazy';
+      videoInner.remove();
+      var poster = video.querySelector('.video__poster');
+      if (poster) poster.remove();
+      video.classList.add('is-playing');
+      video.appendChild(f);
+    });
+  }
+
+  /* --------------------------------------------------------
+     8. FORMULÁŘ – validace v JS
+     -------------------------------------------------------- */
+  var form = $('#form'), status = $('#formStatus');
+  if (form){
+    var rules = {
+      'f-name':   { err:'e-name',    msg:'Doplňte prosím jméno.',        test:function(v){ return v.trim().length >= 2; } },
+      'f-mail':   { err:'e-mail',    msg:'Zkontrolujte tvar e‑mailu.',   test:function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } },
+      'f-subject':{ err:'e-subject', msg:'Vyberte téma.',                test:function(v){ return v !== ''; } },
+      'f-msg':    { err:'e-msg',     msg:'Napište prosím pár vět.',      test:function(v){ return v.trim().length >= 10; } }
+    };
+
+    function validateField(id){
+      var el = document.getElementById(id), rule = rules[id];
+      var ok = rule.test(el.value);
+      var wrap = el.closest('.field');
+      wrap.classList.toggle('has-error', !ok);
+      document.getElementById(rule.err).textContent = ok ? '' : rule.msg;
+      el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+      return ok;
+    }
+
+    Object.keys(rules).forEach(function(id){
+      var el = document.getElementById(id);
+      el.addEventListener('blur', function(){ validateField(id); });
+      el.addEventListener('input', function(){
+        if (el.closest('.field').classList.contains('has-error')) validateField(id);
+      });
+    });
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var ok = Object.keys(rules).map(validateField).every(Boolean);
+      status.classList.toggle('is-err', !ok);
+      if (!ok){
+        status.textContent = 'Formulář zatím není kompletní, zkontrolujte označená pole.';
+        var firstBad = form.querySelector('.field.has-error input, .field.has-error select, .field.has-error textarea');
+        if (firstBad) firstBad.focus();
+        return;
+      }
+      /* TODO: endpoint – zde se data odešlou na server (fetch POST). */
+      status.textContent = 'Děkujeme, zpráva dorazila. Ozveme se co nejdřív.';
+      form.reset();
+    });
+  }
+
+  /* Po načtení obrázků přepočítat pozice ScrollTriggerů */
+  window.addEventListener('load', function(){ if (hasGSAP) ScrollTrigger.refresh(); });
+});
+</script>
+
+</body>
+</html>
